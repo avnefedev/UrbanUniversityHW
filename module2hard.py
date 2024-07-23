@@ -14,5 +14,5 @@ def key_for_req(n):
 
     print(f'Для числа {n} ответ - {all_key}')
 
-for i in range(3, 21):
+for i in range(3, 21): # Проверка ключей для всех значений
     key_for_req(i)
