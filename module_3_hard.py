@@ -6,7 +6,7 @@ data_structure = [
 ((), [{(2, 'Urban', ('Urban2', 35))}])
 ]
 
-def validator(val):
+def defenition_type(val):
     if isinstance(val, int) or isinstance(val, float):
         return val
     elif isinstance(val, str):
@@ -22,21 +22,21 @@ def validator(val):
 def sum_list(*args):
     a = 0
     for i in args:
-        a += validator(i)
+        a += defenition_type(i)
     return a
 
 def sum_dict(value: dict):
     a = 0
     for key in value.keys():
-        a += validator(key)
+        a += defenition_type(key)
     for value in value.values():
-        a += validator(value)
+        a += defenition_type(value)
     return a
 
 def calculate_structure_sum(value):
     answer = 0
     for i in value:
-        answer += validator(i)
+        answer += defenition_type(i)
     return answer
 
 result = calculate_structure_sum(data_structure)
