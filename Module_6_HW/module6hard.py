@@ -69,8 +69,8 @@ class Triangle(Figure):
             Figure.__init__(self, [1, 1, 1], color)
 
     def get_square(self):
-        p = sum(self._Figure__sides)/2
-        a, b, c = self._Figure__sides
+        p = sum(super().get_sides())/2
+        a, b, c = super().get_sides()
         return sqrt(p*(p-a)*(p-b)*(p-c))
 
 
@@ -84,7 +84,7 @@ class Cube(Figure):
             Figure.__init__(self, [1 for _ in range(self.sides_count)], color)
 
     def get_volume(self):
-        return self._Figure__sides[0]**3
+        return super().get_sides()[0]**3
 
 
 
@@ -107,7 +107,7 @@ cube1.set_sides(5, 3, 12, 4, 5)  # Не изменится
 print(cube1.get_sides())
 circle1.set_sides(15)  # Изменится
 print(circle1.get_sides())
-triangle.set_sides(4, 6, 3)  # Изменится
+triangle.set_sides(4, 5, 3)  # Изменится
 print(triangle.get_sides())
 cube1.set_sides(10)  # Изменится
 print(cube1.get_sides())
