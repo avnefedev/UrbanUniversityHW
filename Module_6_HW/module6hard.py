@@ -50,13 +50,14 @@ class Circle(Figure):
     def __init__(self, color, *side):
         if len(side) == self.sides_count:
             Figure.__init__(self, side, color)
-            self.__radius = side[0]/(2*pi)
         else:
             Figure.__init__(self, [1], color)
-            self.__radius = 1/(2*pi)
 
+    def __get_radius(self):
+        return self.get_sides()[0]/(2*pi)
+        
     def get_square(self):
-        return 2*pi*self.__radius**2
+        return 2*self.__get_radius()**2
 
 
 class Triangle(Figure):
@@ -105,7 +106,9 @@ print(cube1.get_color())
 # Проверка на изменение сторон:
 cube1.set_sides(5, 3, 12, 4, 5)  # Не изменится
 print(cube1.get_sides())
+print(f'Площадь: {circle1.get_square()}')
 circle1.set_sides(15)  # Изменится
+print(f'Площадь: {circle1.get_square()}')
 print(circle1.get_sides())
 triangle.set_sides(4, 5, 3)  # Изменится
 print(triangle.get_sides())
@@ -118,5 +121,6 @@ print(len(circle1))
 print(cube1.get_volume())
 print(circle1.get_square())
 print(triangle.get_square())
+
 
 
