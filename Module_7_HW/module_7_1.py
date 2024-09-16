@@ -12,15 +12,15 @@ class Product:
 
 
 class Shop:
-    __file_name = 'product.txt'
+
+    def __init__(self):
+        self.__file_name = 'product.txt'
 
     def get_products(self):
-        prod = ''
         file = open(self.__file_name, 'r')
-        for i in file.read():
-            prod += i
+        products = file.read()
         file.close()
-        return prod
+        return products
 
     def add(self, *product):
         file = open(self.__file_name, 'a')
