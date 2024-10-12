@@ -1,7 +1,7 @@
 def is_prime(func):
-    def wrapper(*args, **kwargs):
+    def wrapper(*args):
         count = 0
-        sum1 = func(*args, **kwargs)
+        sum1 = func(*args)
         for i in range(1, sum1 + 1):
             if sum1 % i == 0:
                 count += 1
