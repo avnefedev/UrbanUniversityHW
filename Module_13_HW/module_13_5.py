@@ -4,15 +4,14 @@ from aiogram.dispatcher.filters.state import State, StatesGroup
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
 from aiogram.dispatcher import FSMContext
 import asyncio
-from set import api
+from set import API
 
-kb = ReplyKeyboardMarkup()
+kb = ReplyKeyboardMarkup(resize_keyboard=True)
 button1 = KeyboardButton(text='Рассчитать')
 button2 = KeyboardButton(text='Информация')
-kb.add(button1)
-kb.add(button2)
+kb.add(button1, button2)
 
-bot = Bot(token=api)
+bot = Bot(token=API)
 dp = Dispatcher(bot, storage=MemoryStorage())
 
 
@@ -54,6 +53,11 @@ async def send_calories(message, state):
     calories = 10 * data['weight'] + 6.25 * data['growth'] - 5 * data['age']
     await message.answer(f'Ваша норма каллорий {calories}')
     await state.finish()
+
+
+@dp.message_handler()
+async def all_message(message):
+    await message.answer('Введите команду /start, чтобы начать общение.')
 
 
 if __name__ == '__main__':
