@@ -5,22 +5,21 @@ from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from aiogram.dispatcher import FSMContext
 import asyncio
-from set import api
+from set import API
 
 
 inl_kb = InlineKeyboardMarkup()
 inl_button1 = KeyboardButton(text='Рассчитать норму калорий', callback_data='calories')
 inl_button2 = KeyboardButton(text='Формулы расчета', callback_data='formulas')
-inl_kb.add(inl_button1)
-inl_kb.add(inl_button2)
+inl_kb.add(inl_button1, inl_button2)
 
-kb = ReplyKeyboardMarkup()
+kb = ReplyKeyboardMarkup(resize_keyboard=True)
 button1 = KeyboardButton(text='Рассчитать')
 button2 = KeyboardButton(text='Информация')
-kb.add(button1)
-kb.add(button2)
+kb.add(button1, button2)
 
-bot = Bot(token=api)
+
+bot = Bot(token=API)
 dp = Dispatcher(bot, storage=MemoryStorage())
 
 
@@ -32,12 +31,12 @@ class UserState(StatesGroup):
 
 @dp.message_handler(commands=['start'])
 async def start(message):
-    await message.answer('Добро пожаловать в бот!', reply_markup=kb)
+    await message.answer('Привет! Я бот помогающий твоему здоровью.', reply_markup=kb)
 
 
 @dp.message_handler(text='Рассчитать')
 async def main_menu(message):
-    await message.answer('Выберите опцию', reply_markup=inl_kb)
+    await message.answer('Выберите опцию:', reply_markup=inl_kb)
 
 
 @dp.callback_query_handler(text=['calories'])
@@ -75,6 +74,11 @@ async def get_formulas(call):
     await call.message.answer('для мужчин: 10 х вес (кг) + 6,25 x рост (см) – 5 х возраст (г) + 5 \n'
                               'для женщин: 10 x вес (кг) + 6,25 x рост (см) – 5 x возраст (г) – 161')
     await call.answer()
+
+
+@dp.message_handler()
+async def all_message(message):
+    await message.answer('Введите команду /start, чтобы начать общение.')
 
 if __name__ == '__main__':
     executor.start_polling(dp, skip_updates=True)
