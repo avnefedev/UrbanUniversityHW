@@ -32,9 +32,9 @@ def add_values():
 def get_all_products():
     connection = sqlite3.connect('product_base.db')
     cursor = connection.cursor()
-    cursor.execute('SELECT * FROM Products')
-    # connection.close()
-    return cursor.fetchall()
+    all_prod = cursor.execute('SELECT * FROM Products').fetchall()
+    connection.commit()
+    return all_prod
 
 
 # connection.commit()
